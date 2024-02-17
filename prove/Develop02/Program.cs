@@ -1,170 +1,188 @@
-using System;
-using System.Linq;
-using System.Collections.Generic;
 
+using System;
+using System.ComponentModel.Design;
+using System.Data;
+using System.Reflection;
+using System.IO;
+using System.Collections.Generic;
+using System.Security.Cryptography.X509Certificates;
+
+
+class Journal
+{
+    // add entry
+    private List<Entry> entries = new List<Entry>();
+    public void addEntry(string prompt, string response)
+    {
+
+        Entry entry = new Entry(prompt,response);
+
+        entries.Add(entry);
+
+    }
+
+    public string prompt()
+    {
+            List<string> prompts = new List<string>
+        {
+            "Who was the most interesting person I interacted with today?",
+            "What was the best part of my day?",
+            "How did I see the hand of the Lord in my life today?",
+            "What was the strongest emotion I felt today?",
+            "If I had one thing I could do over today, what would it be?",
+            "Describe a moment that made you laugh today.",
+            "What was the most challenging aspect of your day?",
+            "Write about a goal you accomplished today, big or small.",
+            "How did you practice self-care today?",
+            "Reflect on a decision you made and its impact on your day.",
+            "What is a new thing you learned or discovered today?",
+            "Write about a moment of gratitude from today.",
+            "If you could change one thing about today, what would it be?",
+            "Describe a place you visited or wish to visit in the future.",
+            "Reflect on a conversation that left an impression on you today."
+        };
+
+    return prompts[new Random().Next(prompts.Count)];
+
+
+    }
+
+    public void DisplayEntries()
+    {
+
+        foreach(Entry entry in entries)
+        {
+            Console.Write($"{entry.Date} {entry.Prompt} \n{entry.Response}");
+
+        }
+//         }
+//         public override string ToString()
+// {
+//     return $"Date: {Date} - Prompt: {Prompt} - Response: {Response}\n";
+// }
+    }
+
+    public void LoadFile(string filename)
+{
+    entries.Clear();
+    string[] lines = System.IO.File.ReadAllLines(filename);
+
+    List<Entry> loadedEntries = new List<Entry>();
+
+    foreach (string line in lines)
+    {
+        string[] parts = line.Split("|");
+
+        if (parts.Length >= 3)
+        {
+            string date = parts[0];
+            string prompt = parts[1];
+            string response = parts[2];
+
+            Entry entry = new Entry(prompt, response);
+            entry.Date = date;
+            loadedEntries.Add(entry);
+        }
+    }
+
+    entries.AddRange(loadedEntries);
+}
+
+
+    public void SaveFile(string filename)
+    {
+        using (StreamWriter outputFile = new StreamWriter(filename))
+         {
+            foreach (Entry entry in entries){
+                outputFile.WriteLine(entry);
+            }
+
+
+    }
+
+    // display
+    // load
+    // save
+}
+class Entry{
+    public string Date {get; set;}
+    public string Prompt {get; set;}
+    public string Response {get; set;}
+
+    public Entry(string prompt, string response)
+    {
+        Prompt = prompt;
+        Response = response;
+        DateTime theCurrentTime = DateTime.Now;
+        Date = theCurrentTime.ToShortDateString();
+    }
+
+   public override string ToString()
+    {
+        return $"Date:{Date}- |Promt:{Prompt} |{Response} \n";
+    }
+
+
+
+ }
 class Program
 {
     static void Main(string[] args)
     {
-        string response = "";
+        Console.WriteLine("Hello Develop02 World!");
+        Journal journal = new Journal();
 
-        string[] referencetext = Program.getScripture().Split("||");
-        Reference reference = new Reference(referencetext[0]);
 
-        string[] words = referencetext[1].Split(' ');
 
-        Scripture scripture = new Scripture(words);
+        Console.WriteLine("Welcome to the Journal Program!");
+        bool running = true;
 
-        while (response != "quit" && !scripture.AllWordsHidden)
+        while (running)
         {
-            // Display the scripture
-            Console.WriteLine("\n\nPress enter to continue or type 'quit' to finish: ");
-            response = Console.ReadLine();
-            if (response == "quit")
+            Console.WriteLine("Please select one of the following choices: ");
+            Console.WriteLine("1. Write ");
+            Console.WriteLine("2. Display ");
+            Console.WriteLine("3. Load ");
+            Console.WriteLine("4. Save ");
+            Console.WriteLine("5. Quit ");
+            Console.WriteLine("What would you like to do?");
+            string input = Console.ReadLine();
+
+            switch (input)
             {
-                break;
-            }
-            else
-            {
-                Console.Clear();
-                Console.Write(reference.ToString());
-                Console.Write(scripture.GetRenderedText());
+                case "1":
+                    string prompt = journal.prompt();
+                    Console.WriteLine(prompt);
+                    string response = Console.ReadLine();
+                    journal.addEntry(prompt, response);
+                    break;
 
-                // Hide a few random words
-                scripture.HideRandomWords();
-            }
-        }
-    }
+                case "2":
+                    journal.DisplayEntries();
+                    break;
 
+                case "3":
+                    Console.WriteLine("Which file would you like to load?: ");
+                    string filename = Console.ReadLine();
+                    journal.LoadFile(filename);
+                    break;
 
+                case "4":
+                    Console.WriteLine("Which file would you like to save?: ");
+                    string save_as = Console.ReadLine();
+                    journal.SaveFile(save_as);
 
-  static string getScripture()
-{
-    string[] scriptures = {
-        "Romans 8:28 - And we know that in all things God works for the good of those who love him, who have been called according to his purpose.",
-                "Isaiah|41|0| || So do not fear, for I am with you; do not be dismayed, for I am your God. I will strengthen you and help you; I will uphold you with my righteous right hand.",
-                "Matthew|6|33| || But seek first his kingdom and his righteousness, and all these things will be given to you as well.",
-                "Jeremiah|9|11| || For I know the plans I have for you,” declares the LORD, “plans to prosper you and not to harm you, plans to give you hope and a future.",
-                "John|14|6| || Jesus answered, 'I am the way and the truth and the life. No one comes to the Father except through me.'",
-                "Psalm|46|10| || He says, 'Be still, and know that I am God; I will be exalted among the nations, I will be exalted in the earth.'",
-                "Ephesians|2|8|9| ||  For it is by grace you have been saved, through faith—and this is not from yourselves, it is the gift of God— not by works, so that no one can boast.",
-                "Proverbs|16|9| ||  In their hearts humans plan their course, but the LORD establishes their steps.",
-                "Romans|12|2| || Do not conform to the pattern of this world, but be transformed by the renewing of your mind. Then you will be able to test and approve what God’s will is—his good, pleasing and perfect will."
-    };
-    
-    if (scriptures.Length == 0)
-    {
-        // Handle the case when scriptures array is empty
-        throw new InvalidOperationException("Scriptures array is empty.");
-    }
-    
-    Random random = new Random();
-    return scriptures[random.Next(scriptures.Length)];
-}
-}
+                    break;
 
-class Reference
-{
-    private string _book;
-    private string _chapter;
-    private string _verse;
-    private string _end_verse;
+                case "5":
+                    running = false;
+                    break;
 
-    public Reference(string text)
-    {
-        string[] parts = text.Split("|");
-        _book = parts[0];
-        _chapter = parts[1];
-        _verse = parts[2];
-        _end_verse = parts.Length > 3 ? parts[3] : "";
-    }
-
-    public override string ToString()
-    {
-        if (_end_verse != "")
-        {
-            return _book + " " + _chapter + ":" + _verse + "-" + _end_verse + "\n";
-        }
-        else
-        {
-            return _book + " " + _chapter + ":" + _verse + "\n";
-        }
-    }
-}
-
-class Scripture
-{
-    private Word[] _words;
-    private bool _allWordsHidden;
-
-    public bool AllWordsHidden { get { return _allWordsHidden; } }
-
-    public Scripture(string[] words)
-    {
-        _words = new Word[words.Length];
-        for (int i = 0; i < words.Length; i++)
-        {
-            _words[i] = new Word(words[i]);
-        }
-    }
-
-    public void HideRandomWords()
-    {
-        Random random = new Random();
-        int wordsToHide = random.Next(1, 4); // Choose 1 to 3 words to hide
-
-        List<int> indicesToHide = new List<int>();
-        for (int i = 0; i < wordsToHide; i++)
-        {
-            int index = random.Next(_words.Length);
-            if (!_words[index].IsHidden) // Ensure word is not already hidden
-            {
-                _words[index].Hide();
-                indicesToHide.Add(index);
+                default:
+                    Console.WriteLine("Invalid choice. Please enter a number from 1 to 5.");
+                    break;
             }
         }
-
-        _allWordsHidden = _words.All(word => word.IsHidden);
-
-        // Redisplay scripture with hidden words
-        Console.WriteLine("\nScripture with hidden words:");
-        foreach (Word word in _words)
-        {
-            Console.Write(word.GetRenderedText() + " ");
-        }
-    }
-
-    public string GetRenderedText()
-    {
-        string renderedText = "";
-        foreach (Word word in _words)
-        {
-            renderedText += word.GetRenderedText() + " ";
-        }
-        return renderedText;
     }
 }
-
-class Word
-{
-    private string _word;
-    private bool _isHidden;
-
-    public bool IsHidden { get { return _isHidden; } }
-
-    public Word(string word)
-    {
-        _word = word;
-        _isHidden = false;
-    }
-
-    public void Hide()
-    {
-        _isHidden = true;
-    }
-
-    public string GetRenderedText()
-    {
-        return _isHidden ? "____" : _word;
-    }
 }
