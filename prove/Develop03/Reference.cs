@@ -30,7 +30,7 @@ class Reference{
     }
     public string toString() {
         if (_end_verse == "") {
-            _ref = $"{_book} {_chapter}:{_verse}-{_end_verse}-";
+            _ref = $"{_book} {_chapter}:{_verse}-{_end_verse} ";
         }
         else {
             _ref = $"{_book} {_chapter}:{_verse} ";

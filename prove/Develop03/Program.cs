@@ -22,7 +22,7 @@ class Program
         string[] words = referencetext[1].Split(' ');
        
         Scripture scripture = new Scripture(words);
-        
+        Console.Clear();
         Console.Write(reference.toString());
         Console.Write(scripture.GetRenderedText());
         while (response != "quit" && scripture.WordsHidden() == false )
