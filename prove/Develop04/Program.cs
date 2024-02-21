@@ -7,9 +7,15 @@ class Program
     {
         printMenu();
         string option  = Console.ReadLine();
+        ListingActivity listening = new ListingActivity();
+        listening.endOfActivity();
+        listening.loadAnimation();
 
         
 
+
+
+        
 
 
 
@@ -20,8 +26,8 @@ class Program
 // ListingActivity
 
 
-
-
+  
+ 
 
      void printMenu(){
         Console.Clear();
