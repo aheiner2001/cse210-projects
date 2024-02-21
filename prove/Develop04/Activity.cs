@@ -26,10 +26,30 @@ class Activity{
         i++;
         }
     }
+      public void loadAnimation2(){
+        int load_speed = 25;
+        int i = 0;
+
+        int num_dots = 25;
+        int j = 0;
+
+        while (i < 10){
+
+        Console.Clear();
+        while(j < num_dots){
+        Console.Write(".");
+        Thread.Sleep(load_speed);
+        j++;
+        }
+        
+        i++;
+        }
+    }
 
 public void getReady(){
     Console.WriteLine("Get Ready...");
     loadAnimation();
+    loadAnimation2();
 
 }
 
