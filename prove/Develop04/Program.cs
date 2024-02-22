@@ -18,14 +18,12 @@ class Program
             else if (option == "2")
             {
                 ReflectingActivity activity = new ReflectingActivity();
-                activity.getReady(); // Prepare the activity
                 activity.runactivity(); // Execute the main activity
                ; // Finish the activity
             }
             else if (option == "3")
             {
                 ListingActivity activity = new ListingActivity();
-                activity.getReady(); // Prepare the activity
                 activity.runactivity(); // Execute the main activity
                ; // Finish the activity
             }
