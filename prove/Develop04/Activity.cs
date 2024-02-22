@@ -6,7 +6,7 @@ class Activity{
         int load_speed = 200;
         int i = 0;
 
-        while (i < 4){
+        while (i < 5){
 
         Console.Write("-");
         Thread.Sleep(load_speed);
@@ -29,23 +29,39 @@ class Activity{
     //  
 
 public void getReady(){
+    Console.Clear();
     Console.WriteLine("Get Ready...");
     loadAnimation();
     
 
 }
  public void runactivity(){
+
     Console.WriteLine("eat");
  }
 
 
 
-public void endOfActivity(){
+public void endOfActivity(int sec, string activity_name){
     Console.WriteLine("Well Done!!");
-    Console.WriteLine($"You have completed the name");
-    Thread.Sleep(2000);
+    Console.WriteLine($"\nYou have completed another {sec} seconds of the {activity_name} activity!");
 }
+
+public int getTime(){
+        string seconds = "";
+        Console.Write("How long, in seconds, would you like for your session? ");
+        seconds = Console.ReadLine();
+        int secs= int.Parse(seconds); 
+        return secs;
+    }
+public DateTime getEndtime(int sec){
+    
+    DateTime startTime = DateTime.Now;
+    DateTime endTime = startTime.AddSeconds(sec);
+    return endTime;
+    }
 }
+
 
 
 

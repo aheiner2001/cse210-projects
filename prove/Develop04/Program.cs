@@ -12,23 +12,22 @@ class Program
             if (option == "1")
             {
                 BreathingActivity activity = new BreathingActivity();
-                activity.getReady(); // Prepare the activity
                 activity.runactivity(); // Execute the main activity
-                activity.endOfActivity(); // Finish the activity
+                 // Finish the activity
             }
             else if (option == "2")
             {
                 ReflectingActivity activity = new ReflectingActivity();
                 activity.getReady(); // Prepare the activity
                 activity.runactivity(); // Execute the main activity
-                activity.endOfActivity(); // Finish the activity
+               ; // Finish the activity
             }
             else if (option == "3")
             {
                 ListingActivity activity = new ListingActivity();
                 activity.getReady(); // Prepare the activity
                 activity.runactivity(); // Execute the main activity
-                activity.endOfActivity(); // Finish the activity
+               ; // Finish the activity
             }
            else if (option =="4"){
             break;
