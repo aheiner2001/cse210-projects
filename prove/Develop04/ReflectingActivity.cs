@@ -1,45 +1,63 @@
-class ReflectingActivity: Activity
+using System;
+using System.Collections.Generic;
+using System.Threading;
+
+class ReflectingActivity : Activity
 {
     private string name = "Reflecting";
     private string description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use in other aspects of your life.";
 
-    public void runactivity(){
-    Console.Clear();
-    Console.WriteLine($"Welcome to the {name} activity. \n");
-    Console.WriteLine($"{description}\n");
-    int sec = getTime();
-    getReady();
-    activity(sec);
-    endOfActivity(sec, name);
-    loadAnimation();
- }
+    public void runactivity()
+    {
+        getIntro(name, description);
+        int sec = getTime();
+        activity(sec);
+        endOfActivity(sec, name);
+    }
 
+    private void activity(int sec)
+    {
+        getReady();
 
-    private void activity(int sec){
-        int items = 0;
-    
-    
-    string prompt = "why are you running";
-       Console.WriteLine("List as many responses as you can to the following prompt: ");
-       Console.WriteLine($"--- {prompt} ---");
-       int i = 3;
+        List<string> prompts = new List<string>();
+        prompts.Add("Think of a time when you stood up for someone else.");
+        prompts.Add("Think of a time when you did something really difficult.");
+        prompts.Add("Think of a time when you helped someone in need.");
+        prompts.Add("Think of a time when you did something truly selfless.");
 
-       Console.Write($"You may begin in: ");
-        while (i != 0) {
-            Console.Write($"{i}");
-            Thread.Sleep(1000);
-            Console.Write("\b \b"); 
-            i--;
-        }
+        List<string> reflectionQuestions = new List<string>();
+        reflectionQuestions.Add("Why was this experience meaningful to you?");
+        reflectionQuestions.Add("Have you ever done anything like this before?");
+        reflectionQuestions.Add("How did you get started?");
+        reflectionQuestions.Add("How did you feel when it was complete?");
+        reflectionQuestions.Add("What made this time different than other times when you were not as successful?");
+        reflectionQuestions.Add("What is your favorite thing about this experience?");
+        reflectionQuestions.Add("What could you learn from this experience that applies to other situations?");
+        reflectionQuestions.Add("What did you learn about yourself through this experience?");
+        reflectionQuestions.Add("How can you keep this experience in mind in the future?");
 
-        Console.WriteLine();
-        
+        Random rand = new Random();
+        int randomIndex = rand.Next(0, prompts.Count);
+        string prompt = prompts[randomIndex];
+
+        Console.WriteLine("Consider the following prompt: ");
+        Console.WriteLine($"\n--- {prompt} ---\n");
+        Console.WriteLine("When you have something in mind, press enter to continue");
+        Console.ReadLine();
+        Console.WriteLine("Now Ponder on each of the following questions as they relate to this experience.");
+        Console.Write("You may begin in: ");
+        begin_countdown();
+        Console.Clear();
+
         DateTime endTime = getEndtime(sec);
-        while (DateTime.Now < endTime){
-            Console.Write("> ");
-            Console.ReadLine();
-            items ++;
+        while (DateTime.Now < endTime)
+        {
+            rand = new Random();
+            randomIndex = rand.Next(0, reflectionQuestions.Count);
+            string question = reflectionQuestions[randomIndex];
+            Console.Write($"\n> {question}");
+            loadAnimation();
+            loadAnimation();
         }
-        Console.WriteLine($"You listed {items} items");
-}
+    }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 
 class Program
 {
@@ -13,23 +14,24 @@ class Program
             {
                 BreathingActivity activity = new BreathingActivity();
                 activity.runactivity(); // Execute the main activity
-                 // Finish the activity
+                // Finish the activity
             }
             else if (option == "2")
             {
                 ReflectingActivity activity = new ReflectingActivity();
                 activity.runactivity(); // Execute the main activity
-               ; // Finish the activity
+                // Finish the activity
             }
             else if (option == "3")
             {
                 ListingActivity activity = new ListingActivity();
                 activity.runactivity(); // Execute the main activity
-               ; // Finish the activity
+                // Finish the activity
             }
-           else if (option =="4"){
-            break;
-           }
+            else if (option == "4")
+            {
+                break;
+            }
             else
             {
                 Console.WriteLine("Did not Understand. Please type a valid response.");
