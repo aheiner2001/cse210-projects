@@ -4,15 +4,20 @@ using System.Threading;
 
 class ReflectingActivity : Activity
 {
-    private string name = "Reflecting";
-    private string description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use in other aspects of your life.";
+    private string _name;
+    private string _description;
 
+
+    public ReflectingActivity(){
+        _name  = "Reflecting";
+        _description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use in other aspects of your life.";
+    }
     public void runactivity()
     {
-        getIntro(name, description);
+        getIntro(_name, _description);
         int sec = getTime();
         activity(sec);
-        endOfActivity(sec, name);
+        endOfActivity(sec, _name);
     }
 
     private void activity(int sec)

@@ -3,17 +3,22 @@ using System.Threading;
 
 class BreathingActivity : Activity
 {   
-    private string name = "Breathing";
-    private string description = "This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing.";
+    private string _name;
+    private string _description;
 
+    public BreathingActivity(){
+        _name = "Breathing";
+        _description = "This activity will help you relax by walking you through breathing in and out slowly. Clear your mind and focus on your breathing.";
+
+    }
     public void runactivity()
     {
-        getIntro(name, description);
+        getIntro(_name, _description);
         int sec = getTime();
         getReady();
         DateTime endTime = getEndtime(sec);
         activity(endTime);
-        endOfActivity(sec, name);
+        endOfActivity(sec, _name);
     }
 
     private void activity(DateTime endTime)
