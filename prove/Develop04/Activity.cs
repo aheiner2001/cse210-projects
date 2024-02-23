@@ -3,6 +3,8 @@ using System.Threading;
 
 class Activity
 {
+     private string _name;
+    private string _description;
     public void loadAnimation()
     {
         int load_speed = 200;
@@ -12,19 +14,19 @@ class Activity
         {
             Console.Write("-");
             Thread.Sleep(load_speed);
-            Console.Write("\b \b"); // Erase the + character
+            Console.Write("\b \b"); 
 
             Console.Write("\\");
             Thread.Sleep(load_speed);
-            Console.Write("\b \b"); // Erase the + character
+            Console.Write("\b \b"); 
 
             Console.Write("|");
             Thread.Sleep(load_speed);
-            Console.Write("\b \b"); // Erase the + character
+            Console.Write("\b \b"); 
 
             Console.Write("/");
             Thread.Sleep(load_speed);
-            Console.Write("\b \b"); // Erase the + character
+            Console.Write("\b \b");
             i++;
         }
     }
