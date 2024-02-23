@@ -36,11 +36,7 @@ class Activity
         loadAnimation();
     }
 
-    public void runactivity()
-    {
-        Console.WriteLine("eat");
-    }
-
+   
     public void begin_countdown()
     {
         int i = 5;
