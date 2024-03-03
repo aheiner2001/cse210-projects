@@ -19,7 +19,7 @@ class Program
             else if (option == "2")
             {
                 ReflectingActivity activity = new ReflectingActivity();
-                activity.runactivity(); // Execute the main activity
+                activity.runactivity();  // Execute the main activity
                 // Finish the activity
             }
             else if (option == "3")

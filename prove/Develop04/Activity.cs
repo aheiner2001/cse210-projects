@@ -1,10 +1,18 @@
 using System;
+using System.Dynamic;
 using System.Threading;
 
 class Activity
 {
-     private string _name;
-    private string _description;
+    public string _name;
+    public string _description;
+
+   
+     public Activity(string name, string description)
+    {
+        _name = name;
+        _description = description;
+    }
     public void loadAnimation()
     {
         int load_speed = 200;
@@ -31,6 +39,7 @@ class Activity
         }
     }
 
+   
     public void getReady()
     {
         Console.Clear();

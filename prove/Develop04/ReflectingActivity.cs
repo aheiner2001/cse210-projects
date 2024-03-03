@@ -4,14 +4,10 @@ using System.Threading;
 
 class ReflectingActivity : Activity
 {
-    private string _name;
-    private string _description;
-
-
-    public ReflectingActivity(){
-        _name  = "Reflecting";
-        _description = "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use in other aspects of your life.";
+    public ReflectingActivity() : base("Reflecting", "This activity will help you reflect on times in your life when you have shown strength and resilience. This will help you recognize the power you have and how you can use it in other aspects of your life.")
+    {
     }
+
     public void runactivity()
     {
         getIntro(_name, _description);
@@ -24,22 +20,26 @@ class ReflectingActivity : Activity
     {
         getReady();
 
-        List<string> prompts = new List<string>();
-        prompts.Add("Think of a time when you stood up for someone else.");
-        prompts.Add("Think of a time when you did something really difficult.");
-        prompts.Add("Think of a time when you helped someone in need.");
-        prompts.Add("Think of a time when you did something truly selfless.");
+        List<string> prompts = new List<string>
+        {
+            "Think of a time when you stood up for someone else.",
+            "Think of a time when you did something really difficult.",
+            "Think of a time when you helped someone in need.",
+            "Think of a time when you did something truly selfless."
+        };
 
-        List<string> reflectionQuestions = new List<string>();
-        reflectionQuestions.Add("Why was this experience meaningful to you?");
-        reflectionQuestions.Add("Have you ever done anything like this before?");
-        reflectionQuestions.Add("How did you get started?");
-        reflectionQuestions.Add("How did you feel when it was complete?");
-        reflectionQuestions.Add("What made this time different than other times when you were not as successful?");
-        reflectionQuestions.Add("What is your favorite thing about this experience?");
-        reflectionQuestions.Add("What could you learn from this experience that applies to other situations?");
-        reflectionQuestions.Add("What did you learn about yourself through this experience?");
-        reflectionQuestions.Add("How can you keep this experience in mind in the future?");
+        List<string> reflectionQuestions = new List<string>
+        {
+            "Why was this experience meaningful to you?",
+            "Have you ever done anything like this before?",
+            "How did you get started?",
+            "How did you feel when it was complete?",
+            "What made this time different than other times when you were not as successful?",
+            "What is your favorite thing about this experience?",
+            "What could you learn from this experience that applies to other situations?",
+            "What did you learn about yourself through this experience?",
+            "How can you keep this experience in mind in the future?"
+        };
 
         Random rand = new Random();
         int randomIndex = rand.Next(0, prompts.Count);
@@ -66,3 +66,4 @@ class ReflectingActivity : Activity
         }
     }
 }
+
