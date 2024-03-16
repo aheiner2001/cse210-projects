@@ -74,7 +74,7 @@ class Program
                 }
                 break;
             case "4":
-                Console.Write("From which file would you like to load your goals?");
+                Console.Write("From which file would you like to load your goals? ");
                 filename = Console.ReadLine();
                 string[] lines = System.IO.File.ReadAllLines(filename);
 
@@ -107,7 +107,7 @@ class Program
                                 goals.Add(checklist);
                                 break;
                             default:
-                                Console.WriteLine("Error: check spelling of txt");
+                                Console.WriteLine("Error");
                                 break;
                         }
                     }
@@ -118,6 +118,7 @@ class Program
                 }
                 break;
             case "5":
+                
                 Console.WriteLine("The Goals are:");
                 int i = 1;
                 foreach (Goal goal in goals)

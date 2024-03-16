@@ -1,4 +1,10 @@
 SimpleGoal||simple||simpley nice||50||False
 EternalGoal||Eternal||forver||25
 ChecklistGoal||checklist||one at a time||50||500||5||0
+ChecklistGoal||checklist||one at a time||50||500||5||0
+ChecklistGoal||checklist||one at a time||50||500||5||0
+ChecklistGoal||checklist||one at a time||50||500||5||0
+ChecklistGoal||checklist||one at a time||50||500||5||0
+ChecklistGoal||checklist||one at a time||50||500||5||0
+ChecklistGoal||checklist||one at a time||50||500||5||0
 800

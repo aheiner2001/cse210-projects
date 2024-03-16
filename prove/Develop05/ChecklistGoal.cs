@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 class ChecklistGoal : Goal
 {
-    private new string _goal;
     private int _checklistlength;
     private int _bonus;
     private int _timesCompleted;
@@ -48,11 +47,13 @@ class ChecklistGoal : Goal
         if (!Complete)
         {
             Console.WriteLine($"Congratulations!! You have earned {Points} points!");
-            if (_timesCompleted == _checklistlength)
+            if (_timesCompleted == _checklistlength - 1)
             {
                 MarkComplete();
                 Console.WriteLine($"You have earned {_bonus} bonus points!");
+                _timesCompleted +=1;
                 return Points + _bonus;
+                
             }
             else
             {
