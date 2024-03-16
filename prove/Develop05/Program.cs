@@ -52,6 +52,7 @@ class Program
                 {
                     Console.WriteLine("Did not understand");
                 }
+                Console.Clear();
                 break;
             case "2":
                 Console.Clear();
