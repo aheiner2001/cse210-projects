@@ -81,8 +81,5 @@ abstract class Goal
         return _complete ? "[X]" : "[ ]";
     }
 
-    public void LoadGoals()
-    {
-        // Implement logic to load goals
-    }
+
 }
