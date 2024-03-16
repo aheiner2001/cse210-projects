@@ -7,9 +7,23 @@ class Program
     static List<Goal> goals = new List<Goal>();
     static bool running = true;
     static int total_points = 0;
+     static List<string> items = new List<string>();
+     static List<string> items_bought = new List<string>();
 
     static void Main(string[] args)
     {
+        
+       
+        items.Add("Cool Sunglasses");
+        items.Add("Awesome T-shirt");
+        items.Add("Fancy Notebook");
+        items.Add("Gourmet Coffee");
+        items.Add("Gadget Organizer");
+        items.Add("Bluetooth Speaker");
+        items.Add("Smartphone Case");
+        items.Add("Fitness Tracker");
+        items.Add("Travel Mug");
+        items.Add("Portable Charger");
         Console.Clear();
         while (running)
         {
@@ -27,7 +41,9 @@ class Program
         Console.WriteLine(" 4. Load Goals");
         Console.WriteLine(" 5. Record Event");
         Console.WriteLine(" 6. Quit");
-        Console.Write("Select a choice from the menu:");
+        Console.WriteLine(" 7. Store");
+        Console.WriteLine(" 8. View Inventory");
+        Console.Write("\nSelect a choice from the menu:");
         string response = Console.ReadLine();
         switch (response)
         {
@@ -135,6 +151,13 @@ class Program
             case "6":
                 running = false;
                 break;
+        
+            case "7":
+                spendPoints();
+                break;
+            case "8":
+                showItems();
+                break;
             default:
                 Console.WriteLine("Please select a valid option");
                 break;
@@ -149,5 +172,45 @@ class Program
         Console.WriteLine(" 3. Checklist Goal");
         Console.Write("Which type of Goal would you like to create? ");
         return Console.ReadLine();
+    }
+    
+    
+    static void spendPoints(){
+        Console.Clear();
+
+        Console.WriteLine("Store: EACH IS 50 POINTS");
+        int j = 1;
+        foreach(string item in items){
+
+            Console.WriteLine($"{j}. {item}");
+            j++;
+        }
+    
+        Console.Write("\nWhat would you like to buy with your points? ");
+        int input =  int.Parse(Console.ReadLine());
+        string item_selected = items[input-1];
+        if (total_points >= 50){
+             items.RemoveAt(input-1);
+             items_bought.Add(item_selected);
+             total_points -= 50;
+            Console.WriteLine($"You spent 50 monies to buy {item_selected}");
+            
+        }
+        else{
+            Console.WriteLine("Not enough points brother");
+            Console.WriteLine("Complete More Goals to earn more points\n");
+        }
+      
+       }
+        static void showItems(){
+        Console.Clear();
+        Console.WriteLine("Inventory:");
+        foreach (string item in items_bought){
+            Console.WriteLine($"-{item}");
+
+        }
+
+
+
     }
 }
