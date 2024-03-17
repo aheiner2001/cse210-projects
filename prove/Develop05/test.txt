@@ -1,4 +1,0 @@
-SimpleGoal||simple||be cool||50||False
-EternalGoal||Eternal||live to become||25
-ChecklistGoal||checklist||be nice ||50||1000||10||2
-125
