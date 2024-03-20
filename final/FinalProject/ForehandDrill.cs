@@ -1,3 +1,3 @@
-class ForehandDrill{
-    
+class ForehandDrill : Drill{
+
 }

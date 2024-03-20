@@ -1,3 +1,3 @@
-class SinglesGame{
-    
+class SinglesGame: Game{
+
 }

@@ -1,3 +1,3 @@
-class DropShot{
-    
+class DropShot: Shot{
+
 }

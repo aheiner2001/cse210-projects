@@ -1,3 +1,3 @@
-class BackhandShot{
+class BackhandShot: Shot{
     
 }
