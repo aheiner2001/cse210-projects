@@ -1,3 +1,3 @@
-class DoublesGame{
-    
+class DoublesGame: Game{
+
 }
