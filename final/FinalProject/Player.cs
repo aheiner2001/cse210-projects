@@ -4,8 +4,14 @@ class Player{
     private string _name;
     private string _age;
 
-    private int _experience;
+    private decimal _experience;
+         private ForehandShot forhand ;
+        private BackhandShot backhand;
+       private  DropShot dropshot;
+       private static List<Shot> shots;
+       
 
+    
 
 
     public Player(){
@@ -16,10 +22,17 @@ class Player{
         _age = Console.ReadLine();
 
         _experience = 0;
+       forhand =  new ForehandShot();
+       
+       backhand =  new BackhandShot();
+        dropshot = new DropShot();
+        
+        shots = new List<Shot>();
+        shots.Add(forhand);
+        shots.Add(backhand);
+        shots.Add(dropshot);
 
-        ForhandShot forhand  = new ForhandShot();
-        BackhandShot backhand  = new BackhandShot();
-        DropShot dropshot  = new DropShot();
+   
 
        
     }
@@ -42,8 +55,16 @@ class Player{
     public string getAge(){
         return _age;
     }
-    public int getExperience(){
+    public decimal getExperience(){
         return _experience;
+    }
+    public void setExperience(decimal num){
+        _experience += num * .050m;
+
+    }
+    
+    public List<Shot> getShots(){
+        return shots;
     }
 }
     

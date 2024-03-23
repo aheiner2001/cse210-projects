@@ -41,7 +41,6 @@ class Program
 
 
 
-
 static void openLink(string link){
  string url = link;
 
@@ -59,15 +58,16 @@ static void openLink(string link){
         {
             Console.WriteLine($"An error occurred: {ex.Message}");
         }
+        
 }
 
 static void displayMenu(){
     Console.WriteLine("Menu: ");
-    Console.WriteLine("1. Create Player");
-    Console.WriteLine("2. Guided Pracitce");
+    Console.WriteLine("1. Create Player");  //complete
+    Console.WriteLine("2. Guided Pracitce");  //complete
     Console.WriteLine("3. Log Matches");
     Console.WriteLine("4. View Matches");
-    Console.WriteLine("5. View Stats");
+    Console.WriteLine("5. View Stats");   //comp;ete
     Console.WriteLine("6. Tip Store");
     Console.WriteLine("7. Load");
     Console.WriteLine("8. Save and Quit");
@@ -96,18 +96,43 @@ static void displayMenu(){
             Console.WriteLine("2. Backhand");
             Console.WriteLine("3. DropShot");
             Console.Write("\nWhich shot would you like to practice? ");
-            response = Console.ReadLine();
+            int responsy = int.Parse(Console.ReadLine());
             Console.Clear();
+            int j = 1;
+            foreach(Player player in players){
+                    Console.WriteLine($"{j}. {player.getName()}");
+                    j++;
+                }
+                Console.Write("Which player is completing the practice: ");
+                int input = int.Parse(Console.ReadLine()) - 1;
+                Player student  = players[input];
+            if (responsy == 1) {
+                
 
-            if (response == "1") {
-                ForehandDrill drill  = new ForehandDrill();
+                 ForehandDrill drill  = new ForehandDrill();
+                
+                student.setExperience(drill.getPoints());
+                var shots = student.getShots(); 
+                var shot = shots[responsy - 1];
+                shot.upDateShotLevel(drill.getPoints());
+
+                
+
             }
-            else if (response == "2") {
+            else if (responsy == 2) {
                 BackhandDrill drill  = new BackhandDrill();
+                student.setExperience(drill.getPoints());
+                var shots = student.getShots(); 
+                var shot = shots[responsy - 1];
+                shot.upDateShotLevel(drill.getPoints());
 
             }
-            else if (response == "3") {
+            else if (responsy == 3) {
                 DropShotDrill drill  = new DropShotDrill(); 
+                student.setExperience(drill.getPoints());
+                var shots = student.getShots(); 
+                var shot = shots[responsy - 1];
+                shot.upDateShotLevel(drill.getPoints());
             }
             else{
                 Console.WriteLine("No entiendo");
@@ -123,6 +148,17 @@ static void displayMenu(){
             break;
         
         case "5":
+
+            foreach(Player player in players){
+                Console.WriteLine($"{player.getName()} Level:{player.getExperience()} ");
+                List<Shot> shots = player.getShots();
+                foreach (Shot shot in shots){
+                    Console.WriteLine($"    {shot.getName()}: {shot.getShotLevel()}");
+                }
+                Console.WriteLine();
+                
+            
+            }
             break;
         
         case "6":

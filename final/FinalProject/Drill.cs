@@ -3,18 +3,18 @@ class Drill{
     private string _name;
     private string _description;
 
-    private int _points;
+    private decimal _points;
     private string _setup;
     private string _objective;
     private string _execution;
-public Drill(string name, string description, int points, string Setup, string objective, string execution){
+public Drill(string name, string description, decimal points, string Setup, string objective, string execution){
     _name = name;
     _description = description;
     _points = points;
     _setup = Setup;
     _objective= objective;
     _execution= execution;
-    Console.WriteLine($"{_name}:\n{_description}\nYou will recieve {_points} experience by completing this practice");
+    Console.WriteLine($"{_name}:\n{_description}\nYou will recieve .{_points} experience by completing this practice");
     Console.Write("Press Enter to begin. ");
     Console.ReadLine();
     runDrill();
@@ -34,8 +34,13 @@ public void runDrill(){
 
     Console.WriteLine(_execution);
     loadAnimation();
-    Console.WriteLine($"You have completed the {_name}. You have recieved {_points} experience points");
+    Console.WriteLine($"You have completed the {_name}. You have recieved .{_points} experience points");
+    
+    
 
+}
+public decimal  getPoints(){
+    return _points;
 }
 
 
