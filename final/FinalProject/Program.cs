@@ -7,13 +7,15 @@ class Program
 {   static bool running = true;
     static List<Player> players = new List<Player>();
     static List<Tip> tips = new List<Tip>()
+    
     {
-        new Tip(1,"Tip 1", "https://www.youtube.com/watch?v=fsgJa0OgeRE"),
-        new Tip(2,"Tip 2", "https://www.youtube.com/watch?v=Jgr4Yo9JrO4"),
-        new Tip(3,"Tip 3", "https://www.youtube.com/watch?v=-raCQ4em4Lc"),
-        new Tip(4,"Tip 4", "https://www.youtube.com/watch?v=ZkYLOfyAUr8"),
-        new Tip(5,"Tip 5", "https://www.youtube.com/watch?v=5bnLUkNb7PA")
+        new Tip(2,"Tip 1", "https://www.youtube.com/watch?v=fsgJa0OgeRE"),
+        new Tip(5,"Tip 2", "https://www.youtube.com/watch?v=Jgr4Yo9JrO4"),
+        new Tip(7,"Tip 3", "https://www.youtube.com/watch?v=-raCQ4em4Lc"),
+        new Tip(9,"Tip 4", "https://www.youtube.com/watch?v=ZkYLOfyAUr8"),
+        new Tip(12,"Tip 5", "https://www.youtube.com/watch?v=5bnLUkNb7PA")
     };
+    static List<Game> games = new List<Game>();
 
 
     static void Main(string[] args)
@@ -27,7 +29,7 @@ class Program
         Console.WriteLine("Welcome to the pickleball trainer\n\nIn this program you will be able to track your progress on your pickleball journey\n\nAs you complete training sessions, level up your shots to improve your game. You will be able to log your games to keep track of scores.  ");
         Console.Write("Press enter to continue: ");
         Console.ReadLine();
-        
+    
         Console.Clear();
         while (running){
             Console.WriteLine("\n");
@@ -65,19 +67,19 @@ static void displayMenu(){
     Console.WriteLine("Menu: ");
     Console.WriteLine("1. Create Player");  //complete
     Console.WriteLine("2. Guided Pracitce");  //complete
-    Console.WriteLine("3. Log Matches");
-    Console.WriteLine("4. View Matches");
+    Console.WriteLine("3. Log Game"); // complete
+    Console.WriteLine("4. View Games");  //complete
     Console.WriteLine("5. View Stats");   //comp;ete
-    Console.WriteLine("6. Tip Store");
+    Console.WriteLine("6. Tip Store"); //complete
     Console.WriteLine("7. Load");
     Console.WriteLine("8. Save and Quit");
-    Console.WriteLine("9. Show list of players");
-    Console.Write("\nWhat would you like to do? ");
+    Console.WriteLine("9. Show list of players"); //complete
+    Console.Write("\nWhat would you like to do? "); //complete
     string response =  Console.ReadLine();
 
     switch(response){
         case "1":
-            Console.Write("How many players would you like to add? ");
+            Console.WriteLine(" How many players would you like to add? ");
             string respose  = Console.ReadLine();
             int playersToAdd = int.Parse(respose);
             int i = 0 ;
@@ -142,9 +144,53 @@ static void displayMenu(){
             break;
         
         case "3":
+            Console.WriteLine("1. Singles");
+            Console.WriteLine("2. Doubles");
+            Console.Write("Which type of game do you want to log? ");
+            int inputy = int.Parse(Console.ReadLine());
+            if (inputy == 1){
+             
+            
+                Console.WriteLine("who is the first player? ");
+                string player1 = playerSelection();
+
+                Console.WriteLine("who is the second player? ");
+                string player2 = playerSelection();
+
+                    SinglesGame singles = new SinglesGame(player1, player2);
+                    
+                    games.Add(singles);
+                    Console.WriteLine(singles);
+
+                }
+            else if( inputy ==2){
+                Console.WriteLine("who is the first player? ");
+                string player1 = playerSelection();
+
+                Console.WriteLine("who is the second player? ");
+                string player2 = playerSelection();
+
+                Console.WriteLine("who is the first player? ");
+                string player3 = playerSelection();
+
+                                Console.WriteLine("who is the second player? ");
+                string player4 = playerSelection();
+
+                DoublesGame doubles = new DoublesGame(player1, player2, player3, player4);
+                games.Add(doubles);
+                Console.WriteLine(doubles);
+
+            }
+
+
             break;
         
         case "4":
+                int gameNum = 1;
+                foreach(Game game in games){
+                    Console.WriteLine($"Game #{gameNum} {game}");
+                    gameNum++;
+                }
             break;
         
         case "5":
@@ -162,6 +208,48 @@ static void displayMenu(){
             break;
         
         case "6":
+            Console.Clear();
+            j = 1;
+            foreach(Player player in players){
+                    Console.WriteLine($"{j}. {player.getName()}");
+                    j++;
+                }
+            if (players.Count() == 0 ){
+                Console.WriteLine("Create a player first");
+                break;
+            }
+            Console.Write("Which Player? ");
+            input = int.Parse(Console.ReadLine()) - 1;
+            student  = players[input];
+            decimal level = student.getExperience();
+            int h = 1;
+            foreach(Tip tip in tips){
+                Console.WriteLine();
+                if (level >= tip.getRequiredLevel()){
+                    Console.WriteLine($"{h}. {tip.getName()}");
+                   
+                }
+                else{
+                    Console.WriteLine($"{h}. Get to level {tip.getRequiredLevel()} to unlock this tip");
+                }
+                h++;
+            }
+            Console.Write("Which tip would you like to learn? ");
+            int selection = int.Parse(Console.ReadLine())-1;
+
+            if (level >= tips[selection].getRequiredLevel()){
+                openLink(tips[selection].getLink());
+                   
+            }
+            else{
+                Console.WriteLine("Need more experience");
+            }
+          
+
+
+
+
+            
             break;
         
         case "7":
@@ -180,6 +268,20 @@ static void displayMenu(){
             break;
         
     }
+}
+static string playerSelection(){
+       int j = 1;
+            foreach(Player guy in players){
+                    Console.WriteLine($"{j}. {guy.getName()}");
+                    j++;
+                }
+        
+            Console.Write("Select Player:  ");
+            int input = int.Parse(Console.ReadLine()) - 1;
+            string player  = players[input].getName();
+            return player;
+
+            
 }
 }
 

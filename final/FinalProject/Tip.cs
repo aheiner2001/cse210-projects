@@ -15,9 +15,13 @@ class Tip{
         string Name = _tipName;
         return Name;
     }
+    public int getRequiredLevel(){
+      return _requiredLevel;
+    }
     public string getLink(){
  return _tipLink;
     }
+    
 }
 
 // be able to unlock different videos when you reach a certain experience.
