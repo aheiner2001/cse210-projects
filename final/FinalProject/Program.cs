@@ -2,6 +2,7 @@ using System;
 using System.Data;
 using System.Diagnostics;
 using System.Globalization;
+using System.Collections.Generic;
 
 class Program
 {   static bool running = true;
@@ -153,6 +154,7 @@ static void displayMenu(){
             
                 Console.WriteLine("who is the first player? ");
                 string player1 = playerSelection();
+                
 
                 Console.WriteLine("who is the second player? ");
                 string player2 = playerSelection();
@@ -161,6 +163,24 @@ static void displayMenu(){
                     
                     games.Add(singles);
                     Console.WriteLine(singles);
+                    if (singles.getScoreTeam1() > singles.getScoreTeam2()){
+                        foreach(Player player in players){
+                            if(player.getName() == player1){
+                                player.setExperience(.25m);
+                            }
+                            
+                        }
+
+                    }
+                    else if (singles.getScoreTeam1() < singles.getScoreTeam2()){
+                        foreach(Player player in players){
+                            if(player.getName() == player2){
+                                player.setExperience(.25m);
+                            }
+                            
+                        }
+
+                    }
 
                 }
             else if( inputy ==2){
@@ -179,6 +199,25 @@ static void displayMenu(){
                 DoublesGame doubles = new DoublesGame(player1, player2, player3, player4);
                 games.Add(doubles);
                 Console.WriteLine(doubles);
+                 if (doubles.getScoreTeam1() > doubles.getScoreTeam2()){
+                        foreach(Player player in players){
+                            if(player.getName() == player1 || player.getName() == player2){
+                                player.setExperience(.25m);
+                            }
+                            
+                        }
+
+                    }
+                    else if (doubles.getScoreTeam1() < doubles.getScoreTeam2()){
+                        foreach(Player player in players){
+                            if(player.getName() == player3 || player.getName() == player4){
+                                player.setExperience(.25m);
+                            }
+                            
+                            
+                        }
+
+                    }
 
             }
 
@@ -253,12 +292,73 @@ static void displayMenu(){
             break;
         
         case "7":
-            break;
+            string filename = "TennisProgram.txt";
+                string[] lines = System.IO.File.ReadAllLines(filename);
+
+                foreach (string line in lines)
+                {
+                    string[] parts = line.Split("||");
+                    string type = parts[0];
+
+                        switch (type)
+                        {
+                            case "Player":
+                                string name = parts[1];
+                                string age = parts[2];
+                             decimal  experience = decimal.Parse( parts[3]);
+                                decimal forehand = decimal.Parse( parts[4]);
+                                decimal backhand = decimal.Parse( parts[5]);
+                                decimal dropshot = decimal.Parse( parts[6]);
+                                Player player = new Player(name, age, experience,forehand, backhand, dropshot);
+                                players.Add(player);
+
+                                
+                                break;
+                            case "SinglesGame":
+                                string player1 = parts[1];
+                                int player1score = int.Parse(parts[2]);
+                                string player2 = parts[3];
+                                int player2score= int.Parse(parts[4]);
+                        
+                                SinglesGame singles = new SinglesGame(player1, player1score, player2, player2score);
+                                games.Add(singles);
+
+                                break;
+                            case "DoublesGame":
+                              player1 = parts[1];
+                                 player2 = parts[2];
+                                 player1score= int.Parse(parts[3]);
+
+                               string player3 = parts[4];
+                                string player4= parts[5];
+                                 player2score= int.Parse(parts[6]);
+                               
+                            DoublesGame doubles = new DoublesGame(player1, player2, player1score, player3, player4, player2score);
+                                games.Add(doubles);
+                             
+                                break;
+                            default:
+                                Console.WriteLine("Error");
+                                break;
+                        }
+                    }
+                   
+            
+                break;
+    
         
         case "8":
 
-           Console.WriteLine("What would you like to name the file: ");
-                string filename = Console.ReadLine();
+           
+                 filename = "TennisProgram.txt";
+                Console.WriteLine("Would you like to overwrite or add to the file? (1)Overwrite (2)Add ");
+                Console.WriteLine("Override for if you loaded your previous data, add if you didn't load but want to add to the file.");
+                Console.Write("Choice: ");
+                string choice = Console.ReadLine();
+                if (choice == "1"){
+                    clearFile(filename);
+                }
+
                 foreach (Player player in players)
                 {
                     player.savePlayer(filename);
@@ -294,6 +394,14 @@ static string playerSelection(){
             return player;
 
             
+}
+
+static void clearFile(string filename)
+{
+    using (StreamWriter sw = new StreamWriter(filename, false))
+    {
+        sw.Write("");
+    }
 }
 }
 

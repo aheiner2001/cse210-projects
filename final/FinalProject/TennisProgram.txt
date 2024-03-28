@@ -1,0 +1,13 @@
+Player||Aaron||22||0.02500||0||0||0
+Player||Derek||24||0||0||0||0
+Player||Matt||23||0||0||0||0
+Player||Ben||24||0||0||0||0
+Player||Jericho||32||0||0||0||0
+Player||Louis||23||0||0||0||0
+Player||Bryson||25||0||0||0||0
+Player||Andrew||26||0||0||0||0
+Player||Barret||36||0||0||0||0
+Player||John||22||0||0||0||0
+SinglesGame||Aaron||11||John||9
+SinglesGame||Aaron||11||Derek||4
+SinglesGame||Aaron||11||Matt||2

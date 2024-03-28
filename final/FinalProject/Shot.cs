@@ -9,6 +9,11 @@ class Shot{
         _shotName = name;
 
     }
+    public Shot(string name, decimal level){
+        _shotName = name;
+        _shotLevel = level;
+       
+    }
 
 public decimal getShotLevel(){
     return _shotLevel;

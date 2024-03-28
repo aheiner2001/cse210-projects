@@ -17,6 +17,21 @@ class Game
         player2 = two;
     }
 
+    public Game(string one, int score1, string two, int score2){
+
+        player1 = one;
+        player2 = two;
+        _team1score = score1;
+        _team2score = score2;
+
+       
+    }
+  public int getScoreTeam1(){
+        return _team1score;
+    }
+  public int getScoreTeam2(){
+        return _team2score;
+    }
     public override string ToString()
     {
         return $"{player1}({_team1score}) : {player2}({_team2score})";

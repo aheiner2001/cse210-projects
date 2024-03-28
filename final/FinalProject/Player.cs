@@ -36,13 +36,22 @@ class Player{
 
        
     }
-    public Player(string name, string age, int experience){
-        Console.Write("Name: ");
+    public Player(string name, string age, decimal experience, decimal fore, decimal back, decimal drop){
+   
         _name = name;
 
         _age = age;
 
         _experience = experience;
+        forhand =  new ForehandShot(fore);
+       
+       backhand =  new BackhandShot(back);
+        dropshot = new DropShot(drop);
+
+        shots = new List<Shot>();
+        shots.Add(forhand);
+        shots.Add(backhand);
+        shots.Add(dropshot);
        
     }
     public string displayInfo(){
