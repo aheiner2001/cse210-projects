@@ -21,4 +21,12 @@ class Game
     {
         return $"{player1}({_team1score}) : {player2}({_team2score})";
     }
+
+     public virtual void saveGame (string filename)
+    {
+        using (StreamWriter outputFile = new StreamWriter(filename, true))
+        {
+            outputFile.WriteLine($"SinglesGame||{player1}||{_team1score}||{player2}||{_team2score}");
+        }
+    }
 }

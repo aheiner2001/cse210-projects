@@ -256,6 +256,18 @@ static void displayMenu(){
             break;
         
         case "8":
+
+           Console.WriteLine("What would you like to name the file: ");
+                string filename = Console.ReadLine();
+                foreach (Player player in players)
+                {
+                    player.savePlayer(filename);
+                    
+                }
+                foreach (Game game in games){
+                    game.saveGame(filename);
+                }
+    
             break;
 
         case "9":

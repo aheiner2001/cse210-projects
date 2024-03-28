@@ -66,5 +66,11 @@ class Player{
     public List<Shot> getShots(){
         return shots;
     }
+    public void savePlayer(string filename){
+      using (StreamWriter outputFile = new StreamWriter(filename, true))
+        {
+            outputFile.WriteLine($"Player||{_name}||{_age}||{_experience}||{forhand.getShotLevel()}||{backhand.getShotLevel()}||{dropshot.getShotLevel()}");
+        }
+    }
 }
     
