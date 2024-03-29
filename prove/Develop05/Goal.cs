@@ -36,7 +36,8 @@ abstract class Goal
         string _checkbox = drawcheckBox();
         return $"{_checkbox} {_name}({_description}) \n";
     }
-// I found another method to get and set above, but I kept both in as a remind that both work.
+
+    // I found another method to get and set above, but I kept both in as a remind that both work.
     public string getName()
     {
         return _name;
@@ -72,7 +73,7 @@ abstract class Goal
 
     public virtual int recordEvent()
     {
-        Console.WriteLine($"Congratuations!! You have earned {_points} points!");
+        Console.WriteLine($"Congratulations!! You have earned {_points} points!");
         return _points;
     }
 
@@ -80,6 +81,4 @@ abstract class Goal
     {
         return _complete ? "[X]" : "[ ]";
     }
-
-
 }
