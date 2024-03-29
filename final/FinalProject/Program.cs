@@ -6,6 +6,17 @@ using System.Collections.Generic;
 
 class Program
 {
+
+
+
+
+
+    // possible things I can add
+
+// 
+
+
+
     static bool running = true;
     static List<Player> players = new List<Player>();
     static List<Tip> tips = new List<Tip>()
@@ -14,7 +25,8 @@ class Program
         new Tip(5, "Tip 2", "https://www.youtube.com/watch?v=Jgr4Yo9JrO4"),
         new Tip(7, "Tip 3", "https://www.youtube.com/watch?v=-raCQ4em4Lc"),
         new Tip(9, "Tip 4", "https://www.youtube.com/watch?v=ZkYLOfyAUr8"),
-        new Tip(12, "Tip 5", "https://www.youtube.com/watch?v=5bnLUkNb7PA")
+        new Tip(12, "Tip 5", "https://www.youtube.com/watch?v=5bnLUkNb7PA"),
+        new Tip(0, "Free Tip", "https://www.youtube.com/watch?v=xEYsymCtIDY")
     };
     static List<Game> games = new List<Game>();
 
@@ -287,7 +299,7 @@ class Program
                     }
                     h++;
                 }
-                Console.Write("Which tip would you like to learn? ");
+                Console.Write("Which tip would you like to use? ");
                 int selection = int.Parse(Console.ReadLine()) - 1;
                 if (level >= tips[selection].getRequiredLevel())
                 {
