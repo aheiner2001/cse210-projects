@@ -168,6 +168,11 @@ static void displayMenu(){
                             if(player.getName() == player1){
                                 player.setExperience(.25m);
                             }
+                              if(player.getName() == player1){
+                                if (player.getExperience() >= .0125m){
+                                player.setExperience(-.25m);
+                                  }
+                            }
                             
                         }
 
@@ -177,6 +182,12 @@ static void displayMenu(){
                             if(player.getName() == player2){
                                 player.setExperience(.25m);
                             }
+                            if(player.getName() == player1){
+                                if (player.getExperience() >= .0125m){
+                                player.setExperience(-.25m);
+                                  }
+                            }
+                            
                             
                         }
 
@@ -202,7 +213,13 @@ static void displayMenu(){
                  if (doubles.getScoreTeam1() > doubles.getScoreTeam2()){
                         foreach(Player player in players){
                             if(player.getName() == player1 || player.getName() == player2){
+                                
                                 player.setExperience(.25m);
+                            }
+                            if(player.getName() == player3|| player.getName() == player4){
+                                if (player.getExperience() >= .0125m){
+                                player.setExperience(-.25m);
+                                }
                             }
                             
                         }
@@ -212,7 +229,16 @@ static void displayMenu(){
                         foreach(Player player in players){
                             if(player.getName() == player3 || player.getName() == player4){
                                 player.setExperience(.25m);
+
                             }
+                             if(player.getName() == player1 || player.getName() == player2){
+                                if (player.getExperience() >= .0125m){
+                                player.setExperience(-.25m);
+                                }
+
+                            }
+
+                            
                             
                             
                         }
