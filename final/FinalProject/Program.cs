@@ -6,17 +6,6 @@ using System.Collections.Generic;
 
 class Program
 {
-
-
-
-
-
-    // possible things I can add
-
-// 
-
-
-
     static bool running = true;
     static List<Player> players = new List<Player>();
     static List<Tip> tips = new List<Tip>()
@@ -79,7 +68,7 @@ class Program
         Console.WriteLine("4. View Games");  //complete
         Console.WriteLine("5. View Stats");   //complete
         Console.WriteLine("6. Tip Store"); //complete
-        Console.WriteLine("7. Load");
+        Console.WriteLine("7. Load");   //complte
         Console.WriteLine("8. Save and Quit");
         Console.WriteLine("9. Show list of players"); //complete
         Console.Write("\nWhat would you like to do? "); //complete
@@ -168,16 +157,19 @@ class Program
                             if (player.getName() == player1)
                             {
                                 player.setExperience(.25m);
+                                player.SinglesWon();
                             }
                             if (player.getName() == player1)
                             {
                                 if (player.getExperience() >= .0125m)
                                 {
                                     player.setExperience(-.25m);
+                                    
                                 }
                             }
                         }
                     }
+                
                     else if (singles.getScoreTeam1() < singles.getScoreTeam2())
                     {
                         foreach (Player player in players)
@@ -185,17 +177,23 @@ class Program
                             if (player.getName() == player2)
                             {
                                 player.setExperience(.25m);
+                                player.SinglesWon();
                             }
                             if (player.getName() == player1)
                             {
                                 if (player.getExperience() >= .0125m)
                                 {
                                     player.setExperience(-.25m);
+                                    
                                 }
                             }
                         }
                     }
                 }
+
+                        
+                
+                
                 else if (inputy == 2)
                 {
                     Console.WriteLine("who is the first player? ");
@@ -216,12 +214,14 @@ class Program
                             if (player.getName() == player1 || player.getName() == player2)
                             {
                                 player.setExperience(.25m);
+                                  player.DoublessWon();
                             }
                             if (player.getName() == player3 || player.getName() == player4)
                             {
                                 if (player.getExperience() >= .0125m)
                                 {
                                     player.setExperience(-.25m);
+                                        
                                 }
                             }
                         }
@@ -233,17 +233,21 @@ class Program
                             if (player.getName() == player3 || player.getName() == player4)
                             {
                                 player.setExperience(.25m);
+                                  player.DoublessWon();
                             }
                             if (player.getName() == player1 || player.getName() == player2)
                             {
                                 if (player.getExperience() >= .0125m)
                                 {
                                     player.setExperience(-.25m);
+                                        
                                 }
                             }
                         }
                     }
                 }
+                
+            
                 break;
 
             case "4":
@@ -264,6 +268,9 @@ class Program
                     {
                         Console.WriteLine($"    {shot.getName()}: {shot.getShotLevel()}");
                     }
+                    Console.WriteLine("    Games won: ");
+                    Console.WriteLine($"       Singles: {player.getGamesWonSingles()}");
+                    Console.WriteLine($"       Doubles: {player.getGamesWonDoubles()}");
                     Console.WriteLine();
                 }
                 break;
@@ -327,7 +334,9 @@ class Program
                             decimal forehand = decimal.Parse(parts[4]);
                             decimal backhand = decimal.Parse(parts[5]);
                             decimal dropshot = decimal.Parse(parts[6]);
-                            Player player = new Player(name, age, experience, forehand, backhand, dropshot);
+                            int singleswony = int.Parse(parts[7]);
+                            int doubleswony = int.Parse(parts[8]);
+                            Player player = new Player(name, age, experience, forehand, backhand, dropshot, singleswony, doubleswony);
                             players.Add(player);
                             break;
                         case "SinglesGame":
@@ -407,3 +416,4 @@ class Program
         }
     }
 }
+

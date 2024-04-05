@@ -3,6 +3,7 @@ using System.IO;
 
 class Game
 {
+    private string _name;
     protected int _team1score { get; set; }
     protected int _team2score { get; set; }
     protected string player1 { get; private set; }
@@ -50,4 +51,8 @@ class Game
             outputFile.WriteLine($"SinglesGame||{player1}||{_team1score}||{player2}||{_team2score}");
         }
     }
+      public string getName(){
+        return _name;
+    }
 }
+

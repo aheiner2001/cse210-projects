@@ -1,5 +1,7 @@
 class SinglesGame : Game
+
 {
+    private string _name = "Singles";
     public SinglesGame(string one, string two) : base(one, two)
     {
     }
@@ -8,4 +10,5 @@ class SinglesGame : Game
     {
        
     }
+
 }

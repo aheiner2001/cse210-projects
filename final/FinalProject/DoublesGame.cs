@@ -2,7 +2,7 @@ class DoublesGame : Game
 {
     private string player3;
     private string player4;
-
+    private string name = "Doubles";
     public DoublesGame(string one, string two, string three, string four) : base(one, two)
     {
         player3 = three;

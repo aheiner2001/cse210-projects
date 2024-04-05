@@ -10,6 +10,10 @@ class Player
     private DropShot dropshot;
     private static List<Shot> shots;
 
+    private int _singlesWon;
+    private int _doublesWon;
+   
+
     public Player()
     {
         Console.Write("Name: ");
@@ -24,12 +28,32 @@ class Player
         dropshot = new DropShot();
         
         shots = new List<Shot>();
+        _singlesWon = 0;
+        _doublesWon = 0;
         shots.Add(forhand);
         shots.Add(backhand);
         shots.Add(dropshot);
+
+      
     }
 
-    public Player(string name, string age, decimal experience, decimal fore, decimal back, decimal drop)
+    public void SinglesWon(){
+        _singlesWon+=1;
+    }
+    public void DoublessWon(){
+        _singlesWon+=1;
+    }
+    
+
+public int getGamesWonSingles(){
+    return _singlesWon;
+}
+public int getGamesWonDoubles(){
+    return _doublesWon;
+ 
+}
+
+    public Player(string name, string age, decimal experience, decimal fore, decimal back, decimal drop, int singlessWon, int doublesWon)
     {
         _name = name;
         _age = age;
@@ -38,15 +62,20 @@ class Player
         backhand = new BackhandShot(back);
         dropshot = new DropShot(drop);
         shots = new List<Shot>();
+        _singlesWon = singlessWon;
+        _doublesWon = doublesWon;
+        
         shots.Add(forhand);
         shots.Add(backhand);
         shots.Add(dropshot);
+
     }
 
     public string displayInfo()
     {
         return $"{_name} \n   Age: {_age} \n   Experience: {_experience}\n";
     }
+    
 
     public string getName()
     {
@@ -77,7 +106,7 @@ class Player
     {
         using (StreamWriter outputFile = new StreamWriter(filename, true))
         {
-            outputFile.WriteLine($"Player||{_name}||{_age}||{_experience}||{forhand.getShotLevel()}||{backhand.getShotLevel()}||{dropshot.getShotLevel()}");
+            outputFile.WriteLine($"Player||{_name}||{_age}||{_experience}||{forhand.getShotLevel()}||{backhand.getShotLevel()}||{dropshot.getShotLevel()}||{_singlesWon}||{_doublesWon}");
         }
     }
 }
