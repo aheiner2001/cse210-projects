@@ -1,58 +1,56 @@
 using System;
-using System.IO;
+using System.Collections.Generic;
 
-class Game
+/// <summary>
+/// Abstract base class for a recorded pickleball match.
+/// Demonstrates OOP Principles:
+/// - Abstraction: Models high-level match state (team scores, outcome calculation, string serialization).
+/// - Polymorphism: Derived classes (SinglesGame, DoublesGame) provide their specific participant structure and serialization.
+/// </summary>
+public abstract class Game
 {
-    private string _name;
-    protected int _team1score { get; set; }
-    protected int _team2score { get; set; }
-    protected string player1 { get; private set; }
-    protected string player2 { get; private set; }
+    private readonly string _gameType;
+    protected int _team1Score;
+    protected int _team2Score;
 
-    public Game(string one, string two)
+    protected Game(string gameType, int team1Score, int team2Score)
     {
-        Console.Write("What was the score of team one: ");
-        _team1score = int.Parse(Console.ReadLine());
-
-        Console.Write("What was the score of team two: ");
-        _team2score = int.Parse(Console.ReadLine());
-
-        player1 = one;
-        player2 = two;
+        _gameType = gameType;
+        _team1Score = Math.Max(0, team1Score);
+        _team2Score = Math.Max(0, team2Score);
     }
 
-    public Game(string one, int score1, string two, int score2)
+    public string GameType => _gameType;
+    public int Team1Score => _team1Score;
+    public int Team2Score => _team2Score;
+
+    // Backward compatibility getters
+    public int getScoreTeam1() => _team1Score;
+    public int getScoreTeam2() => _team2Score;
+    public string getName() => _gameType;
+
+    /// <summary>
+    /// Returns 1 if Team 1 won, 2 if Team 2 won, or 0 if a tie.
+    /// </summary>
+    public int GetWinner()
     {
-        player1 = one;
-        player2 = two;
-        _team1score = score1;
-        _team2score = score2;
+        if (_team1Score > _team2Score) return 1;
+        if (_team2Score > _team1Score) return 2;
+        return 0; // Tie
     }
 
-    public int getScoreTeam1()
-    {
-        return _team1score;
-    }
+    /// <summary>
+    /// Returns the roster of player names on Team 1.
+    /// </summary>
+    public abstract IReadOnlyList<string> GetTeam1Players();
 
-    public int getScoreTeam2()
-    {
-        return _team2score;
-    }
+    /// <summary>
+    /// Returns the roster of player names on Team 2.
+    /// </summary>
+    public abstract IReadOnlyList<string> GetTeam2Players();
 
-    public override string ToString()
-    {
-        return $"{player1}({_team1score}) : {player2}({_team2score})";
-    }
-
-    public virtual void saveGame(string filename)
-    {
-        using (StreamWriter outputFile = new StreamWriter(filename, true))
-        {
-            outputFile.WriteLine($"SinglesGame||{player1}||{_team1score}||{player2}||{_team2score}");
-        }
-    }
-      public string getName(){
-        return _name;
-    }
+    /// <summary>
+    /// Formats the game into a serialized string for storage.
+    /// </summary>
+    public abstract string ToSerializedString();
 }
-

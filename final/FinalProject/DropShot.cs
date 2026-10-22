@@ -1,12 +1,10 @@
-class DropShot : Shot
+/// <summary>
+/// Derived class representing a Drop Shot (dink / soft reset) in pickleball.
+/// Demonstrates OOP Principle: Inheritance.
+/// </summary>
+public class DropShot : Shot
 {
-    public DropShot() : base("DropShot")
+    public DropShot(decimal level = 0.0m) : base("DropShot", level)
     {
-
-    }
-
-    public DropShot(decimal num) : base("DropShot", num)
-    {
-        // Additional initialization code if needed
     }
 }

@@ -1,12 +1,10 @@
-class ForehandShot : Shot
+/// <summary>
+/// Derived class representing a Forehand shot in pickleball.
+/// Demonstrates OOP Principle: Inheritance (inherits common shot properties and behavior from Shot).
+/// </summary>
+public class ForehandShot : Shot
 {
-    public ForehandShot() : base("Forehand")
+    public ForehandShot(decimal level = 0.0m) : base("Forehand", level)
     {
-
-    }
-
-    public ForehandShot(decimal num) : base("Forehand", num)
-    {
-        // Additional initialization code if needed
     }
 }

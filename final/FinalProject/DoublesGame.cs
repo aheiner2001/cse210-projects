@@ -1,30 +1,47 @@
-class DoublesGame : Game
+using System;
+using System.Collections.Generic;
+
+/// <summary>
+/// Represents a 2-on-2 Doubles pickleball match.
+/// Demonstrates OOP Principle: Inheritance & Polymorphism.
+/// </summary>
+public class DoublesGame : Game
 {
-    private string player3;
-    private string player4;
-    private string name = "Doubles";
-    public DoublesGame(string one, string two, string three, string four) : base(one, two)
+    private readonly string _team1Player1;
+    private readonly string _team1Player2;
+    private readonly string _team2Player1;
+    private readonly string _team2Player2;
+
+    public DoublesGame(
+        string team1Player1, 
+        string team1Player2, 
+        int team1Score, 
+        string team2Player1, 
+        string team2Player2, 
+        int team2Score)
+        : base("Doubles", team1Score, team2Score)
     {
-        player3 = three;
-        player4 = four;
+        _team1Player1 = team1Player1;
+        _team1Player2 = team1Player2;
+        _team2Player1 = team2Player1;
+        _team2Player2 = team2Player2;
     }
 
-    public DoublesGame(string player1, string player2, int score1, string playerthree, string playerfour, int score2) : base(player1, score1, player2, score2)
-    {
-        player3 = playerthree;
-        player4 = playerfour;
-    }
+    public string Team1Player1 => _team1Player1;
+    public string Team1Player2 => _team1Player2;
+    public string Team2Player1 => _team2Player1;
+    public string Team2Player2 => _team2Player2;
+
+    public override IReadOnlyList<string> GetTeam1Players() => new[] { _team1Player1, _team1Player2 };
+    public override IReadOnlyList<string> GetTeam2Players() => new[] { _team2Player1, _team2Player2 };
 
     public override string ToString()
     {
-        return $"{player1} and {player2}({_team1score}) : {player3} and {player4}({_team2score})";
+        return $"[Doubles] {_team1Player1} & {_team1Player2} ({_team1Score}) vs {_team2Player1} & {_team2Player2} ({_team2Score})";
     }
 
-    public override void saveGame(string filename)
+    public override string ToSerializedString()
     {
-        using (StreamWriter outputFile = new StreamWriter(filename, true))
-        {
-            outputFile.WriteLine($"DoublesGame||{player1}||{player2}||{_team1score}||{player3}||{player4}||{_team2score}");
-        }
+        return $"DoublesGame||{_team1Player1}||{_team1Player2}||{_team1Score}||{_team2Player1}||{_team2Player2}||{_team2Score}";
     }
 }

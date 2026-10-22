@@ -1,29 +1,33 @@
-class Tip
+using System;
+
+/// <summary>
+/// Represents a coaching tip and video tutorial unlocked at specific player experience levels.
+/// Demonstrates OOP Principle: Encapsulation.
+/// </summary>
+public class Tip
 {
-    private int _requiredLevel;
-    private string _tipName;
-    private string _tipLink;
+    private readonly int _requiredLevel;
+    private readonly string _name;
+    private readonly string _link;
+    private readonly string _topic;
 
-    public Tip(int level, string name, string link)
+    public Tip(int requiredLevel, string name, string link, string topic = "Pickleball Fundamentals")
     {
-        _requiredLevel = level;
-        _tipName = name;
-        _tipLink = link;
+        _requiredLevel = Math.Max(0, requiredLevel);
+        _name = name;
+        _link = link;
+        _topic = topic;
     }
 
-    public string getName()
-    {
-        string Name = _tipName;
-        return Name;
-    }
+    public int RequiredLevel => _requiredLevel;
+    public string Name => _name;
+    public string Link => _link;
+    public string Topic => _topic;
 
-    public int getRequiredLevel()
-    {
-        return _requiredLevel;
-    }
+    // Backward compatibility getters
+    public string getName() => _name;
+    public int getRequiredLevel() => _requiredLevel;
+    public string getLink() => _link;
 
-    public string getLink()
-    {
-        return _tipLink;
-    }
+    public override string ToString() => $"[Level {_requiredLevel}+] {_name} - {_topic}";
 }

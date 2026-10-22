@@ -1,76 +1,90 @@
 using System;
 using System.Threading;
 
-class Drill
+/// <summary>
+/// Abstract base class representing a structured pickleball practice drill.
+/// Demonstrates OOP Principles:
+/// - Abstraction: Encapsulates drill details (metadata, instructions, reward points) and execution logic.
+/// - Polymorphism: Derived drill classes supply specialized content and rewards while reusing shared drill execution flow.
+/// </summary>
+public abstract class Drill
 {
-    private string _name;
-    private string _description;
-    private decimal _points;
-    private string _setup;
-    private string _objective;
-    private string _execution;
+    private readonly string _name;
+    private readonly string _description;
+    private readonly decimal _points;
+    private readonly string _setup;
+    private readonly string _objective;
+    private readonly string _execution;
 
-    public Drill(string name, string description, decimal points, string Setup, string objective, string execution)
+    protected Drill(string name, string description, decimal points, string setup, string objective, string execution)
     {
         _name = name;
         _description = description;
         _points = points;
-        _setup = Setup;
+        _setup = setup;
         _objective = objective;
         _execution = execution;
-        Console.WriteLine($"{_name}:\n{_description}\nYou will receive {_points} experience by completing this practice");
-        Console.Write("Press Enter to begin. ");
-        Console.ReadLine();
-        runDrill();
     }
 
-    public void runDrill()
+    public string Name => _name;
+    public string Description => _description;
+    public decimal Points => _points;
+    public string Setup => _setup;
+    public string Objective => _objective;
+    public string Execution => _execution;
+
+    // Backward compatibility helper
+    public decimal getPoints() => _points;
+
+    /// <summary>
+    /// Executes the interactive drill flow with informative terminal prompts and animations.
+    /// </summary>
+    public virtual void RunDrill()
     {
         Console.Clear();
-        loadAnimation();
-        Console.WriteLine(_name);
-        Console.WriteLine(_objective);
-        enterContinue();
-        Console.WriteLine(_setup);
-        Console.WriteLine(_execution);
-        loadAnimation();
-        Console.WriteLine($"You have completed the {_name}. You have received {_points} experience points");
+        Console.WriteLine($"=== {_name} ===");
+        Console.WriteLine(_description);
+        Console.WriteLine($"\nReward: +{_points} Experience Points upon completion.");
+        Console.WriteLine();
+        EnterContinue("Press Enter to begin the drill...");
+
+        Console.Clear();
+        PlaySpinnerAnimation(3);
+        Console.WriteLine($"=== {_name} ===");
+        Console.WriteLine($"\n[Objective]\n{_objective}");
+        EnterContinue();
+
+        Console.WriteLine($"\n[Setup]\n{_setup}");
+        Console.WriteLine($"\n[Execution Steps]\n{_execution}");
+        PlaySpinnerAnimation(4);
+
+        Console.WriteLine();
+        Console.WriteLine($"🎉 Drill Complete! You earned +{_points} experience points.");
+        EnterContinue();
     }
 
-    public decimal getPoints()
-    {
-        return _points;
-    }
+    // Backward compatibility method
+    public void runDrill() => RunDrill();
 
-    public void loadAnimation()
+    /// <summary>
+    /// Renders a smooth console spinner animation.
+    /// </summary>
+    protected void PlaySpinnerAnimation(int cycles = 3, int stepDelayMs = 120)
     {
-        int load_speed = 200;
-        int i = 0;
-
-        while (i < 5)
+        char[] spinner = new[] { '|', '/', '-', '\\' };
+        for (int i = 0; i < cycles * spinner.Length; i++)
         {
-            Console.Write("-");
-            Thread.Sleep(load_speed);
+            Console.Write(spinner[i % spinner.Length]);
+            Thread.Sleep(stepDelayMs);
             Console.Write("\b \b");
-
-            Console.Write("\\");
-            Thread.Sleep(load_speed);
-            Console.Write("\b \b");
-
-            Console.Write("|");
-            Thread.Sleep(load_speed);
-            Console.Write("\b \b");
-
-            Console.Write("/");
-            Thread.Sleep(load_speed);
-            Console.Write("\b \b");
-            i++;
         }
     }
 
-    public void enterContinue()
+    public void enterContinue() => EnterContinue();
+
+    protected void EnterContinue(string prompt = "Press Enter to continue...")
     {
-        Console.Write("Press Enter to Continue. ");
+        Console.WriteLine(prompt);
         Console.ReadLine();
     }
 }
